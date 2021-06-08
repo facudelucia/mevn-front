@@ -2,11 +2,26 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login" v-if="!estaActivo">Login</router-link> |
+      <a @click="cerrarSesion()" v-if="estaActivo">Cerrar sesion</a> |
+      <router-link to="/notas" v-if="estaActivo">Notas</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+  methods: {
+    ...mapActions(["cerrarSesion"]),
+  },
+  computed: {
+    ...mapGetters(["estaActivo"]),
+  },
+};
+</script>
 
 <style>
 #app {
